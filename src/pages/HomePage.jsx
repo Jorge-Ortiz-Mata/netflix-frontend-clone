@@ -3,7 +3,7 @@ import HomeInformation from "../components/homepage/HomeInformation";
 const HomePage = () => {
 
   return(
-    <main className="text-white bg-transparent bg-[#00081D]">
+    <main className="flex items-center justify-center">
       <HomeInformation />
     </main>
   )
