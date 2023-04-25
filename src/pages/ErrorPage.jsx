@@ -1,4 +1,4 @@
-import ErrorInformation from "../../components/errorpage/ErrorInformation";
+import ErrorInformation from "../components/errorpage/ErrorInformation";
 
 const ErrorPage = () => {
 

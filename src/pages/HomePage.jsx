@@ -1,4 +1,4 @@
-import HomeInformation from "../../components/homepage/HomeInformation";
+import HomeInformation from "../components/homepage/HomeInformation";
 
 const HomePage = () => {
 
