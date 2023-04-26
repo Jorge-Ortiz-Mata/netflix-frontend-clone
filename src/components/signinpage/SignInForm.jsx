@@ -6,8 +6,20 @@ const SignInForm = () => {
   return(
     <form className='flex flex-col gap-5 bg-black' method='post'>
       <h2 className='font-semibold my-5 text-3xl'>Sign In</h2>
-      <TextInput name='email' id='email' placeholder='Email or phone number' />
-      <TextInput name='password' id='password' placeholder='Password' />
+      <TextInput
+        name='email'
+        id='email'
+        placeholder='Email or phone number'
+        required={true}
+        onChange={() => {}}
+      />
+      <TextInput
+        name='password'
+        id='password'
+        placeholder='Password'
+        required={true}
+        onChange={() => {}}
+      />
       <FormButton label='Sign In' />
     </form>
   )

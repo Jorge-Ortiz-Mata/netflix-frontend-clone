@@ -1,16 +1,17 @@
-const TextInput = ({name, id, placeholder, getValue}) => {
+const TextInput = ({type, name, id, placeholder, required, onChange}) => {
 
   const handleChange = (e) => {
-    getValue(e.target.value)
+    onChange(e.target.value, e.target.name)
   }
 
   return(
     <input
-      type="text"
+      type={type}
       name={name}
       id={id}
-      onChange={handleChange}
+      required={required}
       placeholder={placeholder}
+      onChange={handleChange}
       className="bg-gray-800 text-gray-400 font-medium py-3 px-5 rounded"
     />
   )

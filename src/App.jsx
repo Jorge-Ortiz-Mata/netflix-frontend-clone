@@ -39,7 +39,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SignUpEmailPage />,
+        element: <SignUpEmailPage />
       },
       {
         path: 'reg',
