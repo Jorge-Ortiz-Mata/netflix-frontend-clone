@@ -1,14 +1,19 @@
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { signUpWithEmail } from "../hooks/useAuth";
+import { userRegistrationActions } from "../store/user-registration.-slice";
+
 import TextInput from "../components/common/TextInput";
 import FormButton from "../components/common/FormButton";
-import { signUpWithEmail } from "../hooks/useAuth";
-import { useDispatch, useSelector } from "react-redux";
-import { userRegistrationActions } from "../store/user-registration.-slice";
-import { useNavigate } from "react-router-dom";
+import LoaderSpin from "../components/common/LoaderSpin";
+import { useState } from "react";
 
 const SignUpEmailPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const email = useSelector(state => state.userRegistration.email)
+  const email = useSelector(state => state.userRegistration.email);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmail = (value, name) => {
     dispatch(userRegistrationActions.handleEmail({value, name}));
@@ -16,7 +21,9 @@ const SignUpEmailPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const { data } = await signUpWithEmail(email);
+    setIsLoading(false);
 
     if(data.is_present){
       navigate('reg');
@@ -24,6 +31,8 @@ const SignUpEmailPage = () => {
       navigate('new/reg');
     }
   }
+
+  if(isLoading) return <LoaderSpin />
 
   return(
     <form className="flex flex-col gap-5 w-2/6 py-10" method="post" onSubmit={handleSubmit}>
@@ -35,7 +44,7 @@ const SignUpEmailPage = () => {
         placeholder='Email or phone number'
         required={true}
         onChange={handleEmail}
-      />
+        />
       <FormButton label='Create an account' />
     </form>
   )
