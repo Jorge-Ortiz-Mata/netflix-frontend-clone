@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import WhiteNavbar from '../components/common/WhiteNavbar';
+import Footer from '../components/common/Footer';
 
 const WhiteLayout = () => {
 
@@ -7,6 +8,7 @@ const WhiteLayout = () => {
     <>
       <WhiteNavbar />
       <Outlet />
+      <Footer color={'light'} />
     </>
   )
 }
