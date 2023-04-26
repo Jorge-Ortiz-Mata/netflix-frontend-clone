@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,7 +8,6 @@ import { userRegistrationActions } from "../store/user-registration.-slice";
 import TextInput from "../components/common/TextInput";
 import FormButton from "../components/common/FormButton";
 import LoaderSpin from "../components/common/LoaderSpin";
-import { useState } from "react";
 
 const SignUpEmailPage = () => {
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const SignUpEmailPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setIsLoading(true);
     const { data } = await signUpWithEmail(email);
     setIsLoading(false);
