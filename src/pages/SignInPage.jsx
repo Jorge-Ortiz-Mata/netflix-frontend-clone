@@ -3,7 +3,7 @@ import SignInSection from "../components/signinpage/SignInSection";
 const SignInPage = () => {
 
   return(
-    <main className="flex items-center justify-center py-20" id='sign-in-page'>
+    <main className="flex items-center justify-center pb-24">
       <SignInSection />
     </main>
   )
