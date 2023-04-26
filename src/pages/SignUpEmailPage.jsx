@@ -19,9 +19,9 @@ const SignUpEmailPage = () => {
     const { data } = await signUpWithEmail(email);
 
     if(data.is_present){
-
-    } else {
       navigate('reg');
+    } else {
+      navigate('new/reg');
     }
   }
 

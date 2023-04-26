@@ -8,6 +8,7 @@ import SecondaryLayout from './layouts/SecondaryLayout';
 import WhiteLayout from './layouts/WhiteLayout';
 import SignUpEmailPage from './pages/SignUpEmailPage';
 import SignUpPasswordPage from './pages/SignUpPasswordPage';
+import SignUpNewPasswordPage from './pages/SignUpNewPassword';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <SignUpEmailPage />
+      },
+      {
+        path: 'new/reg',
+        element: <SignUpNewPasswordPage />
       },
       {
         path: 'reg',
