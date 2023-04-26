@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+body {
   background-color: #00081D;
   color: #ffffff;
 }
@@ -19,4 +19,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#sign-in-page {
+  background-image: url('./assets/movies.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light;
+  background-color: #000000ad;
 }
