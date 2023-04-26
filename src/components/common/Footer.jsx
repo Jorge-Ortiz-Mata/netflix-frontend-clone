@@ -1,5 +1,5 @@
 const Footer = ({color}) => {
-  let footerClass = "flex flex-col w-full pt-10 py-20 px-10 gap-3";
+  let footerClass = "flex flex-col w-full pt-20 py-40 px-10 gap-3";
   let textClass = 'text-sm font-medium';
 
   if(color === 'light'){

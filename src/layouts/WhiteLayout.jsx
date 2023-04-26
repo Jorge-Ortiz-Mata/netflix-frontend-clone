@@ -7,7 +7,9 @@ const WhiteLayout = () => {
   return(
     <>
       <WhiteNavbar />
-      <Outlet />
+      <main className="flex items-center justify-center pb-24 bg-white">
+        <Outlet />
+      </main>
       <Footer color={'light'} />
     </>
   )

@@ -6,7 +6,8 @@ import ErrorPage from './pages/ErrorPage';
 import SignInPage from './pages/SignInPage';
 import SecondaryLayout from './layouts/SecondaryLayout';
 import WhiteLayout from './layouts/WhiteLayout';
-import SignUpPage from './pages/SignUpPage';
+import SignUpEmailPage from './pages/SignUpEmailPage';
+import SignUpPasswordPage from './pages/SignUpPasswordPage';
 
 const router = createBrowserRouter([
   {
@@ -38,11 +39,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SignUpPage />
+        element: <SignUpEmailPage />,
+      },
+      {
+        path: 'reg',
+        element: <SignUpPasswordPage />
       }
     ]
   }
-])
+]);
 
 function App() {
   return <RouterProvider router={router} />
