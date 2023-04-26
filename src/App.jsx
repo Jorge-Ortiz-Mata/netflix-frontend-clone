@@ -1,61 +1,20 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import MainLayout from './layouts/MainLayout';
-import HomePage from "./pages/HomePage";
-import ErrorPage from './pages/ErrorPage';
-import SignInPage from './pages/SignInPage';
-import SecondaryLayout from './layouts/SecondaryLayout';
-import WhiteLayout from './layouts/WhiteLayout';
-import SignUpEmailPage from './pages/SignUpEmailPage';
-import SignUpPasswordPage from './pages/SignUpPasswordPage';
-import SignUpNewPasswordPage from './pages/SignUpNewPassword';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <MainLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />
-      },
-    ]
-  },
-  {
-    path: '/login',
-    element: <SecondaryLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <SignInPage />
-      }
-    ]
-  },
-  {
-    path: '/signup',
-    element: <WhiteLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <SignUpEmailPage />
-      },
-      {
-        path: 'new/reg',
-        element: <SignUpNewPasswordPage />
-      },
-      {
-        path: 'reg',
-        element: <SignUpPasswordPage />
-      }
-    ]
-  }
-]);
+import { RouterProvider } from 'react-router-dom';
+import { router as routerWithoutUser } from './routes/without-user';
+import { router as routerWithUser } from './routes/with-user';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function App() {
-  return <RouterProvider router={router} />
+  const userToken = useSelector(state => state.userAccessToken.userToken);
+  const [currentUser, setCurrentUser] = useState(userToken)
+
+  useEffect(() => {
+    setCurrentUser(userToken)
+  }, [userToken])
+
+  if(currentUser) return <RouterProvider router={routerWithUser} />
+
+  return <RouterProvider router={routerWithoutUser} />
 }
 
 export default App;

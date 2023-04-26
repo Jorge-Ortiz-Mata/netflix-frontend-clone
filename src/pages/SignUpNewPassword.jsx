@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import Cookies from "universal-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { userAccessTokenActions } from "../store/user-access-token";
 
 import { signUpWithEmailAndNewPassword } from "../hooks/useAuth";
 import { userRegistrationActions } from "../store/user-registration.-slice";
@@ -9,6 +11,8 @@ import { formValidation } from "../validations/signUpNewPasswordForm";
 import TextInput from "../components/common/TextInput";
 import FormButton from "../components/common/FormButton";
 import LoaderSpin from "../components/common/LoaderSpin";
+
+const cookies = new Cookies();
 
 const SignUpNewPasswordPage = () => {
   const dispatch = useDispatch();
@@ -32,14 +36,14 @@ const SignUpNewPasswordPage = () => {
     e.preventDefault();
 
     const {error, message} = formValidation(password, password_confirmation);
-    if(error) {
-      return alert(message);
-    }
+    if(error) return alert(message);
 
     setIsLoading(true);
     const response = await signUpWithEmailAndNewPassword({email, password, password_confirmation})
+    cookies.set('user_access_token', response.data.access_token);
+    dispatch(userAccessTokenActions.updateUserToken(response.data.access_token))
     setIsLoading(false);
-    console.log(response);
+    navigate('/');
   }
 
   if(isLoading) return <LoaderSpin />
