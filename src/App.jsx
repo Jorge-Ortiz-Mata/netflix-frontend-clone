@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 import ErrorPage from './pages/ErrorPage';
 import SignInPage from './pages/SignInPage';
 import SecondaryLayout from './layouts/SecondaryLayout';
+import WhiteLayout from './layouts/WhiteLayout';
+import SignUpPage from './pages/SignUpPage';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,17 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <SignInPage />
+      }
+    ]
+  },
+  {
+    path: '/signup',
+    element: <WhiteLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <SignUpPage />
       }
     ]
   }
