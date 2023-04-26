@@ -1,10 +1,21 @@
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
+import CustomButton from './CustomButton';
+import { useDispatch } from 'react-redux';
+import { userAccessTokenActions } from '../../store/user-access-token';
+import { Logout } from '../../hooks/useAuth';
 
 const cookies = new Cookies();
 
 const NavbarOptions = () => {
+  const dispatch = useDispatch();
   const user = cookies.get('user_access_token');
+
+  const handleLogout = async () => {
+    await Logout();
+    cookies.remove('user_access_token');
+    dispatch(userAccessTokenActions.updateUserToken(undefined));
+  }
 
   if(user){
     return(
@@ -22,7 +33,12 @@ const NavbarOptions = () => {
         </li>
 
         <li>
-          <Link to='/'>Logout</Link>
+          <CustomButton
+            label='Logout'
+            disabled={false}
+            color='red'
+            onPress={handleLogout}
+          />
         </li>
       </ul>
     )
