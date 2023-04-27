@@ -8,7 +8,7 @@ export const signUpWithEmail = async (email) => {
   const headers = { 'Content-Type': 'application/json' }
 
   try {
-    const response = await axios.get( `${process.env.REACT_APP_BASE_URL}/sessions/validate/email`, { params: params }, { headers: headers });
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/sessions/validate/email`, { params: params }, { headers: headers });
     return response;
   } catch (error) {
     console.log(error);
@@ -19,7 +19,18 @@ export const signUpWithEmailAndNewPassword = async (user) => {
   const headers = { 'Content-Type': 'application/json' }
 
   try {
-    const response = await axios.post( `${process.env.REACT_APP_BASE_URL}/users/`, { user: JSON.stringify(user) }, { headers: headers });
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/`, { user: JSON.stringify(user) }, { headers: headers });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const signIn = async (user) => {
+  const headers = { 'Content-Type': 'application/json' }
+
+  try {
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/sessions/create`, {user: JSON.stringify(user)}, { headers: headers });
     return response;
   } catch (error) {
     console.log(error);

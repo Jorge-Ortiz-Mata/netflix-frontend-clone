@@ -40,13 +40,13 @@ const SignUpNewPasswordPage = () => {
 
     setIsLoading(true);
     const response = await signUpWithEmailAndNewPassword({email, password, password_confirmation})
-    cookies.set('user_access_token', response.data.access_token);
-    dispatch(userAccessTokenActions.updateUserToken(response.data.access_token))
-    setIsLoading(false);
     navigate('/');
+    cookies.set('user_access_token', response.data.access_token);
+    dispatch(userAccessTokenActions.updateUserToken(response.data.access_token));
+    setIsLoading(false);
   }
 
-  if(isLoading) return <LoaderSpin />
+  if(isLoading) return <LoaderSpin />;
 
   return(
     <form className="flex flex-col gap-5 w-2/6 py-10" onSubmit={handleSubmit} method='post'>
