@@ -1,4 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
+
+import { getMovies } from '../services/http-services';
+
 import ErrorPage from '../pages/ErrorPage';
 import MainLayout from '../layouts/MainLayout';
 import MoviesPage from '../pages/MoviesPage';
@@ -11,7 +14,8 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MoviesPage />
+        element: <MoviesPage />,
+        loader: getMovies
       }
     ]
   }
