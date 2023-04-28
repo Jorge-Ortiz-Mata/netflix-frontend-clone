@@ -28,13 +28,8 @@ export const signUpWithEmailAndNewPassword = async (user) => {
 
 export const signIn = async (user) => {
   const headers = { 'Content-Type': 'application/json' }
-
-  try {
-    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/sessions/create`, {user: JSON.stringify(user)}, { headers: headers });
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/sessions/create`, {user: JSON.stringify(user)}, { headers: headers });
+  return response;
 }
 
 export const Logout = async () => {

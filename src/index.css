@@ -23,8 +23,18 @@ code {
 
 #sign-in-page {
   background-image: url('./assets/movies.png');
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-blend-mode: soft-light;
   background-color: #000000ad;
+}
+
+#landing-page {
+  background-image: url('./assets/movies.png');
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light;
+  background-color: #070c20c4;
 }

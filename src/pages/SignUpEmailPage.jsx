@@ -45,7 +45,7 @@ const SignUpEmailPage = () => {
         placeholder='Email or phone number'
         required={true}
         onChange={handleEmail}
-        />
+      />
       <FormButton label='Create an account' />
     </form>
   )

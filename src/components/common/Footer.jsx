@@ -7,6 +7,14 @@ const Footer = ({color}) => {
     textClass = textClass + ' text-black';
   }
 
+  if(color === 'black'){
+    footerClass = footerClass + ' bg-black/50';
+  }
+
+  if(color === 'main'){
+    footerClass = footerClass + ' bg-black/50';
+  }
+
   return(
     <footer className={footerClass}>
       <p className={textClass}>Questions? Call 800 953 1752</p>

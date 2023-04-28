@@ -1,14 +1,16 @@
 import Cookies from "universal-cookie";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { signIn } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+
 import TextInput from "../components/common/TextInput";
 import FormButton from "../components/common/FormButton";
+
+import { userAccessTokenActions } from "../store/user-access-token";
 import { userRegistrationActions } from "../store/user-registration.-slice";
 import { formValidation } from "../validations/signUpPasswordForm";
-import { signIn } from "../hooks/useAuth";
-import { useState } from "react";
 import LoaderSpin from "../components/common/LoaderSpin";
-import { userAccessTokenActions } from "../store/user-access-token";
-import { useNavigate } from "react-router-dom";
 
 const cookies = new Cookies();
 
@@ -18,6 +20,10 @@ const SignUpPasswordPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { email, password } = useSelector(state => state.userRegistration);
 
+  useEffect(() => {
+    if(!email) navigate('/signup');
+  }, [email, navigate])
+
   const handleInput = (value, name) => {
     dispatch(userRegistrationActions.handlePassword({value, name}))
   }
@@ -26,17 +32,18 @@ const SignUpPasswordPage = () => {
     e.preventDefault();
     const { error, message } = formValidation(password);
     if(error) return alert(message);
-
     setIsLoading(true);
-    const response = await signIn({email, password});
 
-    if(response.status === 200) {
+    try {
+      const response = await signIn({email, password});
       navigate('/');
       cookies.set('user_access_token', response.data.access_token);
       dispatch(userAccessTokenActions.updateUserToken(response.data.access_token));
-    } else {}
-
-    setIsLoading(false);
+    } catch(error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   if(isLoading) return <LoaderSpin />;
