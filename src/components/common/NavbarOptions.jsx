@@ -1,5 +1,5 @@
 import Cookies from 'universal-cookie';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CustomButton from './CustomButton';
 import { useDispatch } from 'react-redux';
 import { userAccessTokenActions } from '../../store/user-access-token';
@@ -8,10 +8,12 @@ import { Logout } from '../../hooks/useAuth';
 const cookies = new Cookies();
 
 const NavbarOptions = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = cookies.get('user_access_token');
 
   const handleLogout = async () => {
+    navigate('/');
     await Logout();
     cookies.remove('user_access_token');
     dispatch(userAccessTokenActions.updateUserToken(undefined));

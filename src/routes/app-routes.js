@@ -10,8 +10,6 @@ import SignUpNewPasswordPage from '../pages/SignUpNewPassword';
 import MoviesPage from '../pages/MoviesPage';
 import MoviePage from '../pages/MoviePage';
 
-import { getMovies } from '../services/http-movies';
-
 export const userAuthenticatedRoutes = [
   {
     path: '/',
@@ -20,8 +18,7 @@ export const userAuthenticatedRoutes = [
     children: [
       {
         index: true,
-        element: <MoviesPage />,
-        loader: getMovies
+        element: <MoviesPage />
       },
       {
         path: 'movies',

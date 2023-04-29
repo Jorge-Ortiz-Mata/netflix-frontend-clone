@@ -1,9 +1,19 @@
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { getMovies } from "../../services/http-movies";
 import MovieCard from "./MovieCard";
 
 const MoviesList = () => {
-  const response = useLoaderData();
-  const movies = response.data;
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getMovies();
+      setMovies(response.data);
+    }
+
+    fetchData();
+  }, []);
 
 
   return(
