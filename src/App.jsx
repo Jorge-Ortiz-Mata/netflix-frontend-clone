@@ -1,6 +1,5 @@
-import { RouterProvider } from 'react-router-dom';
-import { router as routerWithoutUser } from './routes/without-user';
-import { router as routerWithUser } from './routes/with-user';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { userAuthenticatedRoutes, userNoAuthenticatedRoutes } from './routes/app-routes';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -12,9 +11,9 @@ function App() {
     setCurrentUser(userToken)
   }, [userToken])
 
-  if(currentUser) return <RouterProvider router={routerWithUser} />
+  const router = createBrowserRouter(currentUser ? userAuthenticatedRoutes : userNoAuthenticatedRoutes);
 
-  return <RouterProvider router={routerWithoutUser} />
+  return <RouterProvider router={router} />
 }
 
 export default App;

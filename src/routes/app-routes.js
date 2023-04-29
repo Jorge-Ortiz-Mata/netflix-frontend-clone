@@ -1,5 +1,3 @@
-import { createBrowserRouter } from 'react-router-dom';
-
 import MainLayout from "../layouts/MainLayout";
 import HomePage from '../pages/HomePage';
 import ErrorPage from '../pages/ErrorPage';
@@ -9,8 +7,36 @@ import WhiteLayout from '../layouts/WhiteLayout';
 import SignUpEmailPage from '../pages/SignUpEmailPage';
 import SignUpPasswordPage from '../pages/SignUpPasswordPage';
 import SignUpNewPasswordPage from '../pages/SignUpNewPassword';
+import MoviesPage from '../pages/MoviesPage';
+import MoviePage from '../pages/MoviePage';
 
-export const router = createBrowserRouter([
+import { getMovies } from '../services/http-movies';
+
+export const userAuthenticatedRoutes = [
+  {
+    path: '/',
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <MoviesPage />,
+        loader: getMovies
+      },
+      {
+        path: 'movies',
+        children: [
+          {
+            path: ':movieId',
+            element: <MoviePage />,
+          }
+        ]
+      }
+    ]
+  }
+]
+
+export const userNoAuthenticatedRoutes = [
   {
     path: '/',
     element: <MainLayout />,
@@ -52,4 +78,5 @@ export const router = createBrowserRouter([
       }
     ]
   }
-]);
+]
+
