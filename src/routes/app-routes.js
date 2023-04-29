@@ -9,6 +9,7 @@ import SignUpPasswordPage from '../pages/SignUpPasswordPage';
 import SignUpNewPasswordPage from '../pages/SignUpNewPassword';
 import MoviesPage from '../pages/MoviesPage';
 import MoviePage from '../pages/MoviePage';
+import MovieNewPage from "../pages/MovieNewPage";
 
 export const userAuthenticatedRoutes = [
   {
@@ -26,6 +27,10 @@ export const userAuthenticatedRoutes = [
           {
             path: ':movieId',
             element: <MoviePage />,
+          },
+          {
+            path: 'new',
+            element: <MovieNewPage />
           }
         ]
       }

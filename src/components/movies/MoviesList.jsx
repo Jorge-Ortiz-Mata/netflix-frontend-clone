@@ -15,9 +15,8 @@ const MoviesList = () => {
     fetchData();
   }, []);
 
-
   return(
-    <ul className="flex items-center gap-5">
+    <ul className="inline-grid grid-cols-3 gap-10">
       {
         movies.map((movie) => {
           return <MovieCard key={movie.id} movie={movie} />
