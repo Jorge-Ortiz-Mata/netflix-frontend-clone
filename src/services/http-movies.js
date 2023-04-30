@@ -21,7 +21,7 @@ export const getMovie = async (id) => {
     'Authorization': userToken
   }
 
-  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/movies/${id}`, { headers: headers }, {});
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/movies/${id}.json`, { headers: headers }, {});
   return response;
 }
 
