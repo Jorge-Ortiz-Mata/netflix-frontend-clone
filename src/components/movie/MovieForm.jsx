@@ -1,24 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { createMovie } from "../../services/http-movies";
-
 import LabelInput from "../common/LabelInput";
 import TextInput from "../common/TextInput";
 import FileInput from "../common/FileInput";
 import TextAreaInput from "../common/TextAreaInput";
-import ErrorsList from "../common/ErrorsList";
-import LoaderSpin from "../common/LoaderSpin";
 
-const NewMovieForm = () => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState([])
+const MovieForm = ({movieParams, textBtn, handleFormSubmit}) => {
   const [movie, setMovie] = useState({
-    name: '',
-    year: 0,
-    duration: 0,
-    description: '',
+    name: movieParams?.name,
+    year: movieParams?.year,
+    duration: movieParams?.duration,
+    description: movieParams?.description,
     avatar: undefined
   });
 
@@ -28,26 +19,13 @@ const NewMovieForm = () => {
     ))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      await createMovie(movie);
-      navigate('/')
-    } catch (error) {
-      const errors = error.response.data.errors;
-      setErrors(errors)
-    }
-
-    setIsLoading(false);
+    handleFormSubmit(movie);
   }
-
-  if(isLoading) return <LoaderSpin />
 
   return(
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      { errors.length > 0 && <ErrorsList errors={errors} /> }
       <div className="flex flex-col gap-1">
         <LabelInput name='name' label={'Name: '} />
         <TextInput
@@ -104,7 +82,7 @@ const NewMovieForm = () => {
       <div className="flex items-center justify-center">
         <input
           type="submit"
-          value='Create new movie'
+          value={textBtn}
           className="p-2 rounded text-white font-semibold text-sm bg-green-600 cursor-pointer hover:bg-green-900"
         />
       </div>
@@ -112,4 +90,4 @@ const NewMovieForm = () => {
   )
 }
 
-export default NewMovieForm;
+export default MovieForm;

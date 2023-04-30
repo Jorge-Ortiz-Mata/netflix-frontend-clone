@@ -10,6 +10,7 @@ import SignUpNewPasswordPage from '../pages/SignUpNewPassword';
 import MoviesPage from '../pages/MoviesPage';
 import MoviePage from '../pages/MoviePage';
 import MovieNewPage from "../pages/MovieNewPage";
+import MovieEditPage from "../pages/MovieEditPage";
 
 export const userAuthenticatedRoutes = [
   {
@@ -26,12 +27,21 @@ export const userAuthenticatedRoutes = [
         children: [
           {
             path: ':movieId',
-            element: <MoviePage />,
+            children: [
+              {
+                index: true,
+                element: <MoviePage />
+              },
+              {
+                path: 'edit',
+                element: <MovieEditPage />
+              }
+            ]
           },
           {
             path: 'new',
             element: <MovieNewPage />
-          }
+          },
         ]
       }
     ]
