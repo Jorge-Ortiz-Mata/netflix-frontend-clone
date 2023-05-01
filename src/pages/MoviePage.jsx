@@ -29,10 +29,6 @@ const MoviePage = () => {
     retrieveMovie();
   }, [movieId]);
 
-  const deleteMovie = async () => {
-    console.log('Deleting...');
-  }
-
   if(isLoading){
     return <main className="flex flex-col p-10 gap-10 mb-20 justify-center items-center">
       <LoaderSpin />
@@ -41,12 +37,7 @@ const MoviePage = () => {
 
   return(
     <>
-      {
-        ReactDOM.createPortal(
-          <Modal modal={modal} handlePress={deleteMovie} />,
-          document.getElementById('modal-root')
-        )
-      }
+      { ReactDOM.createPortal(<Modal modal={modal} />, document.getElementById('modal-root')) }
       <main className="flex flex-col p-10 gap-10 mb-20">
         <MovieDetails movie={movie} />
       </main>
