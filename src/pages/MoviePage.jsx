@@ -1,12 +1,16 @@
+import ReactDOM from 'react-dom';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 import { getMovie } from "../services/http-movies";
 
+import Modal from '../components/modal/Modal';
 import LoaderSpin from "../components/common/LoaderSpin";
 import MovieDetails from "../components/movie/MovieDetails";
 
 const MoviePage = () => {
+  const modal = useSelector(state => state.modal);
   const { movieId } = useParams();
   const [ isLoading, setIsLoading ] = useState(true);
   const [movie, setMovie] = useState(undefined);
@@ -23,7 +27,11 @@ const MoviePage = () => {
     }
 
     retrieveMovie();
-  }, [movieId])
+  }, [movieId]);
+
+  const deleteMovie = async () => {
+    console.log('Deleting...');
+  }
 
   if(isLoading){
     return <main className="flex flex-col p-10 gap-10 mb-20 justify-center items-center">
@@ -32,9 +40,17 @@ const MoviePage = () => {
   }
 
   return(
-    <main className="flex flex-col p-10 gap-10 mb-20">
-      <MovieDetails movie={movie} />
-    </main>
+    <>
+      {
+        ReactDOM.createPortal(
+          <Modal modal={modal} handlePress={deleteMovie} />,
+          document.getElementById('modal-root')
+        )
+      }
+      <main className="flex flex-col p-10 gap-10 mb-20">
+        <MovieDetails movie={movie} />
+      </main>
+    </>
   )
 }
 
