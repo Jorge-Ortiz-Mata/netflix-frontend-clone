@@ -35,3 +35,15 @@ export const createMovie = async (movie) => {
   const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/movies/`, { movie: movie }, { headers: headers });
   return response;
 }
+
+
+export const updateMovie = async (id, movie) => {
+  const userToken = cookies.get('user_access_token')
+  const headers = {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': userToken
+  }
+
+  const response = await axios.patch(`${process.env.REACT_APP_BASE_URL}/movies/${id}`, { movie: movie }, { headers: headers });
+  return response;
+}
